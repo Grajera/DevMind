@@ -5,9 +5,14 @@ import threading
 import itertools
 import os
 
+# === CONFIG ===
+# Change to match your local model name from `ollama list`
 MODEL_NAME = 'custom-llama-m'
+
+# Default Ollama local API endpoint
 OLLAMA_URL = 'http://localhost:11434/api/generate'
 
+# === UX Spinner ===
 def spinner(text="Thinking..."):
     for c in itertools.cycle(["|", "/", "-", "\\"]):
         if not spinner.running:
@@ -18,6 +23,7 @@ def spinner(text="Thinking..."):
     sys.stdout.write("\r" + " " * 50 + "\r")
 spinner.running = True
 
+# === Core API Call ===
 def ask_ollama(prompt):
     response = requests.post(
         OLLAMA_URL,
@@ -29,6 +35,7 @@ def ask_ollama(prompt):
     )
     return response.json()
 
+# === Banner ===
 def print_banner():
     print(r"""
     ____            __  ____           __            _____ ____  __         
@@ -45,13 +52,16 @@ def print_banner():
 DevMind - Offline AI Programmer Assistant by Michael Grajera
     """)
 
+# === Entry Point ===
 def main():
     print_banner()
 
+    # No prompt or file provided
     if len(sys.argv) < 2:
         print("Usage:\n  python devmind.py \"<prompt>\"\n  python devmind.py -f <filename>\n  python devmind.py \"<prompt>\" -f <filename>")
         return
-
+    
+    # Load from file if -f is provided
     if "-f" in sys.argv:
         file_index = sys.argv.index("-f")
         if file_index + 1 >= len(sys.argv):
@@ -65,17 +75,20 @@ def main():
             file_contents = f.read()
 
         if file_index > 1:
-            custom_prompt = ' '.join(sys.argv[1:file_index])
+            # Prompt AND file
+            custom_prompt = ' '.join(sys.argv[1:file_index]) 
             prompt = f"{custom_prompt}\n\n{file_contents}"
         else:
+            # Only file
             prompt = file_contents
         print(f"Loaded file: {filepath}")
     else:
+        # Just a raw prompt
         prompt = ' '.join(sys.argv[1:])
 
     print(f"\n FULL Prompt:\n{prompt}\n")
 
-    # Start spinner
+    # Start spinner thread
     spinner.running = True
     t = threading.Thread(target=spinner)
     t.start()
