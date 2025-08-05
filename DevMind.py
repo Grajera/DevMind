@@ -7,7 +7,7 @@ import os
 
 # === CONFIG ===
 # Change to match your local model name from `ollama list`
-MODEL_NAME = 'custom-llama-m'
+MODEL_NAME = 'custom-llama-model'
 
 # Default Ollama local API endpoint
 OLLAMA_URL = 'http://localhost:11434/api/generate'
@@ -29,7 +29,7 @@ def ask_ollama(prompt):
         OLLAMA_URL,
         json={
             'model': MODEL_NAME,
-            'prompt': f"""You are DevMind, a brilliant programming assistant. You specialize in algorithms and writing test code in C++ (Boost Test) and C#. Be clear, optimal, and thorough.\n\n{prompt}""",
+            'prompt': f"""You are DevMind, a brilliant programming assistant. You specialize in algorithms and writing test code in C++ (Boost Test). Be clear, optimal, and thorough.\n\n{prompt}""",
             'stream': False
         }
     )
