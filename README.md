@@ -1,6 +1,6 @@
 # DevMind – Offline AI Assistant for C++ Unit Test Generation
 
-**DevMind** is a lightweight offline tool that uses a locally hosted LLaMA 3.3 70B language model to generate C++ unit tests with Boost.Test. It runs entirely offline using [Ollama](https://ollama.com/) and a simple Python CLI.
+**DevMind** is a lightweight offline tool that uses a locally hosted language model (via [Ollama](https://ollama.com/)) to generate C++ unit tests with Boost.Test. It runs fully offline using a simple Python CLI and works with **any code-capable model available in Ollama**, such as LLaMA 3, DeepSeek-Coder, or CodeGemma.
 
 ---
 
@@ -13,15 +13,15 @@ Automatically generate structured, documentation-quality unit tests from natural
 ## Features
 
 - **Fully Offline** – No internet or cloud required  
+- **Model-Agnostic** – Works with any compatible Ollama model  
 - **Python CLI** – Cross-platform and easy to use  
-- **LLM-Powered** – Uses LLaMA 3.3 70B (quantized `.gguf`)  
-- **Generates Boost.Test suites** with edge cases and inline docs  
-- **Token/Time Stats** printed after generation  
-- **Easy Scripting** – Modular design for automation  
+- **Boost.Test Output** – Generates test suites with edge cases and inline docs  
+- **Stats Displayed** – See token estimates and response timing  
+- **Automation-Friendly** – Modular design for scripting or pipelines  
 
 ---
 
 ## Example Usage
 
-```powershell
+```bash
 python devmind.py "write a boost test for this file" -f main.cpp
