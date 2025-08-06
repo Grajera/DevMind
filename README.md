@@ -52,7 +52,6 @@ Automatically generate structured, documentation-quality unit tests from natural
 ### Notes
 - Flags may appear in any order.
 - Quoted prompt is required unless you're only using `-f <file>`.
-- You can combine flags: `--stream`, `--debug`, and `-o` all work together.
 
 ---
 
@@ -85,7 +84,7 @@ python devmind.py "Explain this code" -f example.cpp --debug
 
 ### Combine Everything
 ```bash
-python devmind.py "Test this algorithm in Boost" -f sort.cpp --stream -o sort_tests.txt --debug
+python devmind.py "Test this algorithm in Boost" -f sort.cpp -o sort_tests.txt --debug
 ```
 
 
